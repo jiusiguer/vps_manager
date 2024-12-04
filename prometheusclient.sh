@@ -58,5 +58,5 @@ sudo systemctl enable --now node_exporter
 sudo systemctl status node_exporter | head -n 3 > /dev/null
 
 echo -e "\n================ 面板端配置命令 =================="
-echo "sudo sed -i '/job_name: \"node_exporter\"/,/static_configs:/!b;/static_configs:/a\\      - targets: [\"$PUBLIC_IP:9100\"]\n        labels:\n          instance: '\''$INSTANCE_NAME'\''' /etc/prometheus/prometheus.yml && sudo systemctl restart prometheus"
+echo "sudo sed -i \"/job_name: \\\"node_exporter\\\"/,/static_configs:/!b;/static_configs:/a\\      - targets: [\\\"$PUBLIC_IP:9100\\\"]\\n        labels:\\n          instance: '$INSTANCE_NAME'\" /etc/prometheus/prometheus.yml && sudo systemctl restart prometheus"
 echo "=================================================="
