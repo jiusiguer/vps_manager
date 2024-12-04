@@ -55,14 +55,8 @@ EOF
 
 sudo systemctl daemon-reload
 sudo systemctl enable --now node_exporter
+sudo systemctl status node_exporter | head -n 3 > /dev/null
 
-# 使用 grep 检查服务状态，而不是显示完整状态
-if systemctl is-active --quiet node_exporter; then
-    echo "Node Exporter 服务已成功启动"
-else
-    echo "警告：Node Exporter 服务启动失败"
-fi
-
-echo -e "\n==== 面板端配置命令 ===="
+echo -e "\n================ 面板端配置命令 =================="
 echo "sudo sed -i '/job_name: \"node_exporter\"/,/static_configs:/!b;/static_configs:/a\\      - targets: [\"$PUBLIC_IP:9100\"]\n        labels:\n          instance: '\''$INSTANCE_NAME'\''' /etc/prometheus/prometheus.yml && sudo systemctl restart prometheus"
-echo "==== 复制上述命令到面板端执行 ===="
+echo "=================================================="
